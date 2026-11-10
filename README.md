@@ -4,7 +4,7 @@ This repository contains the implementation developed by **Group 9** for the **T
 
 The project extends **Paparazzi UAS** for autonomous indoor flight with a physical **Parrot Bebop drone**. The goal was to run perception and navigation onboard under strong hardware constraints, using lightweight computer vision methods suitable for real-time flight.
 
-The main team implementation is available on the `compressed_detector` branch. My separate `cnn_gate_detector` branch contains the CNN-based gate detection work and initial gate-following behavior.
+The main team implementation is available on the `compressed_detector` branch. A separate `cnn_gate_detector` branch contains the CNN-based gate detection work and initial gate-following behavior.
 
 **Pull request:** [tudelft/paparazzi#119](https://github.com/tudelft/paparazzi/pull/119)
 
@@ -50,7 +50,7 @@ The project adds a custom onboard obstacle-avoidance stack to Paparazzi:
 - `custom_detector`: processes the camera stream and extracts orange-pillar and green-plant obstacle evidence.
 - `custom_avoider`: converts the detector output into left / middle / right risk sectors for reactive navigation.
 
-The vision pipeline runs on downsampled YUV camera frames and uses color segmentation plus lightweight structural filters. The final output is a compact risk map that the navigation state machine uses to select safe motion directions.
+My main contribution consist in the vision pipeline which runs on downsampled YUV camera frames and uses color segmentation plus lightweight structural filters. The final output is a compact risk map that the navigation state machine uses to select safe motion directions.
 
 ### Orange Obstacle Detection
 
@@ -163,9 +163,9 @@ The validated orange and green masks are merged into one obstacle representation
 
 ---
 
-## My Contribution: CNN Gate Detection
+## CNN Gate Detection
 
-I developed a compact gate detector for the Parrot Bebop that runs onboard without external machine-learning libraries. The network was implemented manually in C, has approximately **16k trainable parameters**, and predicts gate presence plus a bounding box:
+A compact gate detector was developed for the Parrot Bebop that runs onboard without external machine-learning libraries. The network was implemented manually in C, has approximately **16k trainable parameters**, and predicts gate presence plus a bounding box:
 
 - `presence_score`: whether the gate is visible.
 - `cx`, `cy`: normalized gate-center coordinates.
